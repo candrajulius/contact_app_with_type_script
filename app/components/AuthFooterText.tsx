@@ -16,7 +16,7 @@ function AuthFooterText({
     return(
         <p className="mt-4 text-center text-sm text-gray-600">
             {content_one}{" "}
-            <Link href={path} className={`font-semibold !text-gray-800 hover:!underline ${color}`}>
+            <Link href={path} className={`font-semibold !text-gray-800 hover:!underline active:!underline focus-visible:!underline ${color}`}>
                 {content_two}
             </Link>
         </p>

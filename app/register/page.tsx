@@ -53,9 +53,9 @@ function RegisterPage(){
                         <Input.Password size="large" placeholder="Password" prefix={<LockOutlined className="text-gray-400" />} className="rounded-full"/>
                     </Form.Item>
 
-                    <ButtonText title="Register" color="hover:!bg-blue-500"/>
+                    <ButtonText title="Register" color="hover:!bg-blue-500 active:!bg-blue-600 focus-visible:!bg-blue-500"/>
                 </Form>
-                <AuthFooterText content_one="Sudah punya akun ?" path="/login" content_two="Silahkan login" color="hover:!text-blue-600"/>
+                <AuthFooterText content_one="Sudah punya akun ?" path="/login" content_two="Silahkan login" color="hover:!text-blue-600 active:!text-blue-600 focus-visible:!text-blue-600"/>
             </div>
         </div>
     );

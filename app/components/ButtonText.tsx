@@ -11,7 +11,7 @@ function ButtonText({
 }: ButtonProps)
 {
  return (
-    <Button htmlType="submit" size="large" className={`mt-2 h-11 w-full !rounded-full border-none font-semibold text-white ${color} hover:!text-black`}>{title}</Button>
+    <Button htmlType="submit" size="large" type="default" className={`mt-2 h-11 w-full !rounded-full !border-black !border font-semibold !text-black ${color} hover:!text-black active:!text-black focus-visible:!text-black`}>{title}</Button>
  );
 }
 

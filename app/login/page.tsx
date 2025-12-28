@@ -52,8 +52,8 @@ function LoginPage(){
                     <Input.Password size="large" placeholder="Password" prefix={<LockOutlined className="text-gray-400" />} className="rounded-full"/>
                 </Form.Item>
 
-                <ButtonText title="Login" color="hover:!bg-green-600"/>
-                <AuthFooterText content_one="Belum punya akun?"  path="/register" content_two="Silahkan daftar" color="hover:!text-green-500"/>
+                <ButtonText title="Login" color="hover:!bg-green-600 active:!bg-green-600 focus-visible:!bg-green-600"/>
+                <AuthFooterText content_one="Belum punya akun?"  path="/register" content_two="Silahkan daftar" color="hover:!text-green-500 active:!text-green-500 focus-visible:!text-green-500"/>
             </Form>
         </div>
         </div>

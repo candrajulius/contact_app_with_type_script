@@ -1,7 +1,8 @@
-import { DeleteOutlined, MailOutlined, PhoneOutlined, TagOutlined, UserOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ExclamationCircleFilled, MailOutlined, PhoneOutlined, TagOutlined, UserOutlined} from "@ant-design/icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Card, message, Popconfirm } from "antd";
+import { Avatar, Card, message, Modal } from "antd";
 import { deleteContact } from "../lib/api";
+import InfoRow from "./InfoRow";
 
 type ContactCardProps = {
     id: string;
@@ -9,6 +10,7 @@ type ContactCardProps = {
     phoneNumber: string
     email: string;
     tag: string;
+    imageUrl?: string;
 };
 
 export default function ContactCard({
@@ -29,46 +31,38 @@ export default function ContactCard({
         },
     });
 
+    const showDeleteConfirm = () => {
+        Modal.confirm({
+            title: "Delete Contact Confirmation",
+            content: `Are you sure you want to delete this contact with id: ${id} ?`,
+            okText: "Yes",
+            icon: <ExclamationCircleFilled />,
+            cancelText: "No",
+            okButtonProps: { danger: true },
+            onOk: async () => {
+                await mutation.mutateAsync(id);
+            },
+        });
+      };
+
   return (
     <Card hoverable size="small" className="w-full">
-         <Popconfirm
-        title="Delete contact ?"
-        description={`Are you sure delete contact ${id} ?`}
-        okText="Delete"
-        cancelText="Cancel"
-        onConfirm={() => mutation.mutate(id)}
-      >
-        <DeleteOutlined className="absolute right-3 top-3 cursor-pointer !text-red-500 hover:!text-red-600" />
-      </Popconfirm>
+
+      <DeleteOutlined onClick={showDeleteConfirm} className="absolute right-3 top-3 !text-red-500 hover:!text-red-600" />
 
       <div className="space-y-2 text-sm">
+
         {/* Name */}
-        <div className="flex items-center gap-2">
-          <UserOutlined className="text-blue-500" />
-          <span className="font-medium">Name:</span>
-          <span>{name?? "-"}</span>
-        </div>
+        <InfoRow icon={<UserOutlined />} label="Name" value={name} />
 
         {/* Email */}
-        <div className="flex items-center gap-2">
-          <MailOutlined className="text-green-500" />
-          <span className="font-medium">Email:</span>
-          <span>{email ?? "-"}</span>
-        </div>
+        <InfoRow icon={<MailOutlined />} label="Email" value={email} />
 
         {/* Phone Number */}
-        <div className="flex items-center gap-2">
-          <PhoneOutlined className="text-purple-500" />
-          <span className="font-medium">Phone Number:</span>
-          <span>{phoneNumber ?? "-"}</span>
-        </div>
+        <InfoRow icon={<PhoneOutlined />} label="Phone Number" value={phoneNumber} />
 
         {/* Tag */}
-        <div className="flex items-center gap-2">
-          <TagOutlined className="text-orange-500" />
-          <span className="font-medium">Tag:</span>
-          <span>{tag ?? "-"}</span>
-        </div>
+        <InfoRow icon={<TagOutlined />} label="Tag" value={tag} />
       </div>
     </Card>
   );
