@@ -1,10 +1,9 @@
 "use client"
 
-import { Modal, Form, Input, message, UploadFile} from "antd"
-import { addContact, ContactPayload } from "../lib/api"
-import { MailOutlined, PhoneOutlined, PictureOutlined, TagOutlined, UserOutlined } from "@ant-design/icons";
+import { Modal, Form, Input, message} from "antd"
+import { addContact} from "../lib/api"
+import { MailOutlined, PhoneOutlined, TagOutlined, UserOutlined } from "@ant-design/icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 
 type AddContactModalProps = {
     open: boolean;

@@ -1,7 +1,7 @@
 "use client";
 
-import { Layout, Spin, Typography, Avatar, Dropdown, FloatButton, Empty, Input } from "antd";
-import { PlusOutlined, UserOutlined, LogoutOutlined, SearchOutlined } from "@ant-design/icons";
+import { Layout, Spin, Typography, Avatar, Dropdown, FloatButton, Empty, Input, Result } from "antd";
+import { PlusOutlined, UserOutlined, LogoutOutlined, SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ContactCard from "../components/ContactCard";
@@ -19,7 +19,7 @@ function HomePage() {
 
 
   // REACT QUERY
-  const { data: contacts = [], isLoading } = useQuery<Contact[]>({
+  const { data: contacts = [], isLoading, isError, error } = useQuery<Contact[]>({
     queryKey: ["contacts"],
     queryFn: async () => {
       const res = await getContacts();
@@ -79,6 +79,16 @@ function HomePage() {
     </Layout>
   );
 }
+
+if (isError) {
+  return (
+        <Layout className="min-h-screen !bg-white">
+          <div className="flex min-h-screen items-center justify-center bg-gray-100">
+            <Result status="error" title="Failed to load contacts" subTitle={`Error: ${error instanceof Error ? error.message : "Unknown error"}`} icon={<CloseCircleOutlined />} />
+          </div>
+        </Layout>
+      );
+  }
 
   return (
     <Layout className="min-h-screen !bg-white">
